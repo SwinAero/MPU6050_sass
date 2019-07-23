@@ -17,7 +17,7 @@ void MPU6050::begin(){
   writeMPU6050(MPU6050_SMPLRT_DIV, 0x00);
   writeMPU6050(MPU6050_CONFIG, 0x00);
   writeMPU6050(MPU6050_GYRO_CONFIG, 0x08);
-  writeMPU6050(MPU6050_ACCEL_CONFIG, 0x00);
+  writeMPU6050(MPU6050_ACCEL_CONFIG, 0x03);
   writeMPU6050(MPU6050_PWR_MGMT_1, 0x01);
   this->update();
   angleGyroX = 0;
@@ -109,9 +109,9 @@ void MPU6050::update(){
 
   temp = (rawTemp + 12412.0) / 340.0;
 
-  accX = ((float)rawAccX) / 16384.0;
-  accY = ((float)rawAccY) / 16384.0;
-  accZ = ((float)rawAccZ) / 16384.0;
+  accX = ((float)rawAccX) / 2048.0;
+  accY = ((float)rawAccY) / 2048.0;
+  accZ = ((float)rawAccZ) / 2048.0;
 
   angleAccX = atan2(accY, sqrt(accZ * accZ + accX * accX)) * 360 / 2.0 / PI;
   angleAccY = atan2(accX, sqrt(accZ * accZ + accY * accY)) * 360 / -2.0 / PI;
